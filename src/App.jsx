@@ -2,6 +2,13 @@ import { useState } from 'react'
 import varsityData from '../data/varsity.json'
 import './App.css'
 
+const GRADE_LABELS = {
+  FR: 'Freshman',
+  SO: 'Sophomore',
+  JR: 'Junior',
+  SR: 'Senior',
+}
+
 function Logo() {
   return (
     <svg className="logo" viewBox="0 0 100 120" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -34,7 +41,8 @@ function Roster({ team }) {
             <tr key={`${p.number}-${p.name}-${i}`}>
               <td className="num">{p.number}</td>
               <td className="player-name">
-                {p.name} <strong className="year-badge">{p.year}</strong>
+                <span className="player-name-text">{p.name}</span>
+                <strong className="player-grade">{GRADE_LABELS[p.year] ?? p.year}</strong>
               </td>
               <td className="parents">{p.parents}</td>
             </tr>

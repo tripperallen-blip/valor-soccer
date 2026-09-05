@@ -17,7 +17,7 @@ function Logo() {
   )
 }
 
-}
+function Roster({ team }) {
   return (
     <>
       <div className="coaches-bar">

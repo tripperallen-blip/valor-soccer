@@ -1,16 +1,6 @@
 import { useState } from 'react'
 import varsityData from '../data/varsity.json'
-import jvData from '../data/jv.json'
-import l3Data from '../data/l3.json'
 import './App.css'
-
-const TEAMS = {
-  varsity: varsityData,
-  jv: jvData,
-  l3: l3Data,
-}
-
-const TEAM_ORDER = ['varsity', 'jv', 'l3']
 
 function Logo() {
   return (
@@ -22,22 +12,12 @@ function Logo() {
       <circle cx="50" cy="76" r="14" fill="#3a5a90" stroke="#7aaad0" strokeWidth="1.5" />
       <path d="M50 64 L44 70 L46 78 L54 78 L56 70 Z" fill="white" opacity="0.7" />
       <path d="M28 54 H72 L68 62 H32 Z" fill="#5a8ac8" />
-      <text x="50" y="61" textAnchor="middle" fill="white" fontSize="7" fontFamily="Arial" fontWeight="bold">VALOR</text>
+      <text x="50" y="61" textAnchor="middle" fill="#ffffff" fontSize="7" fontFamily="Inter, sans-serif" fontWeight="bold">VALOR</text>
     </svg>
   )
 }
 
-function Verse({ verse }) {
-  if (!verse) return null
-  return (
-    <div className="verse">
-      <blockquote>"{verse.text}"</blockquote>
-      <cite>{verse.reference ?? verse.ref}</cite>
-    </div>
-  )
 }
-
-function Roster({ team }) {
   return (
     <>
       <div className="coaches-bar">
@@ -50,18 +30,17 @@ function Roster({ team }) {
       </div>
       <table className="roster-table">
         <tbody>
-          {(team.roster ?? []).map((p) => (
-            <tr key={`${p.number}-${p.name}`}>
+          {(team.roster ?? []).map((p, i) => (
+            <tr key={`${p.number}-${p.name}-${i}`}>
               <td className="num">{p.number}</td>
               <td className="player-name">
-                {p.name} <span className="year-badge">{p.year}</span>
+                {p.name} <strong className="year-badge">{p.year}</strong>
               </td>
               <td className="parents">{p.parents}</td>
             </tr>
           ))}
         </tbody>
       </table>
-      <Verse verse={team.verse} />
     </>
   )
 }
@@ -90,7 +69,7 @@ function scoreCell(game) {
     )
   }
   return (
-    <span style={{ color: 'rgba(255,255,255,0.2)', fontSize: '0.8rem' }}>—</span>
+    <span style={{ color: '#ffffff', fontSize: '0.8rem' }}>—</span>
   )
 }
 
@@ -128,48 +107,34 @@ function Schedule({ team }) {
         <tbody>
           {schedule.map((g, i) => (
             <tr key={`${g.date}-${g.opponent}-${i}`} className={g.playoff ? 'playoff-row' : undefined}>
-              <td className="date-col" style={g.playoff ? { color: 'var(--gold)' } : undefined}>
+              <td className="date-col" style={g.playoff ? { color: '#ffffff' } : undefined}>
                 {g.date}
               </td>
               <td className="day-col">{g.day}</td>
               <td
                 className="opp-col"
-                style={g.playoff ? { color: 'var(--gold)', fontWeight: 800 } : undefined}
+                style={g.playoff ? { color: '#ffffff', fontWeight: 800 } : undefined}
               >
                 {opponentCell(g)}
               </td>
               <td className="time-col">
-                <span style={{ color: 'var(--light-blue)', whiteSpace: 'nowrap' }}>
+                <span style={{ color: '#ffffff', whiteSpace: 'nowrap' }}>
                   {g.time}
                 </span>
               </td>
-              <td className="score-col" style={g.playoff ? { color: 'var(--gold)' } : undefined}>
+              <td className="score-col" style={g.playoff ? { color: '#ffffff' } : undefined}>
                 {scoreCell(g)}
               </td>
             </tr>
           ))}
         </tbody>
       </table>
-      <Verse verse={team.verse} />
     </>
   )
 }
 
 function App() {
-  const [activeTeam, setActiveTeam] = useState('varsity')
-  const [activeView, setActiveView] = useState({
-    varsity: 'roster',
-    jv: 'roster',
-    l3: 'roster',
-  })
-
-  function selectTeam(key) {
-    setActiveTeam(key)
-  }
-
-  function selectView(team, view) {
-    setActiveView((prev) => ({ ...prev, [team]: view }))
-  }
+  const [activeView, setActiveView] = useState('roster')
 
   return (
     <>
@@ -181,55 +146,29 @@ function App() {
             <p>Valor Christian High School</p>
           </div>
         </div>
-        <div className="team-tabs">
-          {TEAM_ORDER.map((key) => {
-            const t = TEAMS[key]
-            return (
-              <button
-                key={key}
-                className={`team-tab${key === activeTeam ? ' active' : ''}`}
-                onClick={() => selectTeam(key)}
-              >
-                {t.team}
-              </button>
-            )
-          })}
-        </div>
       </div>
 
-      <div>
-        {TEAM_ORDER.map((key) => {
-          const t = TEAMS[key]
-          const view = activeView[key]
-          return (
-            <div
-              key={key}
-              id={`team-${key}`}
-              className={`panel${key === activeTeam ? ' active' : ''}`}
-            >
-              <div className="view-tabs">
-                <button
-                  className={`view-tab${view === 'roster' ? ' active' : ''}`}
-                  onClick={() => selectView(key, 'roster')}
-                >
-                  Roster
-                </button>
-                <button
-                  className={`view-tab${view === 'schedule' ? ' active' : ''}`}
-                  onClick={() => selectView(key, 'schedule')}
-                >
-                  Schedule
-                </button>
-              </div>
-              <div id={`${key}-roster`} className={`panel${view === 'roster' ? ' active' : ''}`}>
-                <Roster team={t} />
-              </div>
-              <div id={`${key}-schedule`} className={`panel${view === 'schedule' ? ' active' : ''}`}>
-                <Schedule team={t} />
-              </div>
-            </div>
-          )
-        })}
+      <div id="team-varsity" className="panel active">
+        <div className="view-tabs">
+          <button
+            className={`view-tab${activeView === 'roster' ? ' active' : ''}`}
+            onClick={() => setActiveView('roster')}
+          >
+            Roster
+          </button>
+          <button
+            className={`view-tab${activeView === 'schedule' ? ' active' : ''}`}
+            onClick={() => setActiveView('schedule')}
+          >
+            Schedule
+          </button>
+        </div>
+        <div id="varsity-roster" className={`panel${activeView === 'roster' ? ' active' : ''}`}>
+          <Roster team={varsityData} />
+        </div>
+        <div id="varsity-schedule" className={`panel${activeView === 'schedule' ? ' active' : ''}`}>
+          <Schedule team={varsityData} />
+        </div>
       </div>
     </>
   )

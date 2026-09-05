@@ -1,10 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
   --navy:       #1b2a5e;
   --mid-blue:   #5a7ca8;
+  --mid-blue-dark: #4c6e99;
   --light-blue: #b8d4e8;
   --pale-blue:  #ddeef7;
   --gold:       #f0b429;
@@ -16,7 +17,6 @@
   --loss:       #e05a5a;
   --tie:        #aaaaaa;
   --sans:       'Inter', sans-serif;
-  --display:    'Barlow Condensed', sans-serif;
 }
 
 html {
@@ -32,7 +32,7 @@ body, #root {
   font-size: 16px;
   line-height: 1.5;
   background: var(--pale-blue);
-  color: var(--navy);
+  color: #ffffff;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -47,26 +47,24 @@ body, #root {
 }
 
 /* ── HEADER ── */
-.header { background: var(--navy); padding: 16px 16px 0; text-align: center; }
+.header { background: var(--navy); padding: 16px 16px 14px; text-align: center; }
 
 .header-top {
   display: flex; align-items: center; justify-content: center;
-  gap: 14px; margin-bottom: 14px;
+  gap: 14px; margin-bottom: 0;
 }
 
 .logo { width: 60px; height: 60px; }
 
 .header-title h1 {
-  font-family: var(--display);
   font-weight: 800; font-size: 1.7rem;
-  color: var(--white); line-height: 1.1;
+  color: #ffffff; line-height: 1.1;
   text-transform: uppercase; letter-spacing: 0.04em;
   margin: 0;
 }
 .header-title p {
-  font-family: var(--display);
   font-weight: 600; font-size: 1rem;
-  color: var(--light-blue); text-transform: uppercase; letter-spacing: 0.06em;
+  color: #ffffff; text-transform: uppercase; letter-spacing: 0.06em;
   line-height: 1.3;
   margin: 0;
 }
@@ -76,14 +74,14 @@ body, #root {
 
 .team-tab {
   flex: 1; padding: 10px 4px; text-align: center;
-  font-family: var(--display);
+  font-family: var(--sans);
   font-weight: 700; font-size: 0.95rem;
   text-transform: uppercase; letter-spacing: 0.05em;
-  color: var(--light-blue); background: transparent;
+  color: #ffffff; background: transparent;
   border: none; border-bottom: 3px solid transparent;
   cursor: pointer; transition: all 0.2s;
 }
-.team-tab.active { color: var(--white); border-bottom-color: var(--gold); }
+.team-tab.active { color: #ffffff; border-bottom-color: var(--gold); }
 .team-tab.disabled { opacity: 0.4; cursor: default; }
 
 /* ── VIEW TABS ── */
@@ -91,16 +89,16 @@ body, #root {
 
 .view-tab {
   flex: 1; padding: 10px; text-align: center;
-  font-family: var(--display);
+  font-family: var(--sans);
   font-weight: 700; font-size: 1rem;
   text-transform: uppercase; letter-spacing: 0.06em;
-  color: var(--text-light); background: transparent;
-  border: none; border-bottom: 3px solid transparent;
+  color: #ffffff; background: var(--mid-blue-dark);
+  border: none; border-bottom: 6px solid transparent;
   cursor: pointer; transition: all 0.2s;
 }
 .view-tab.active {
-  color: var(--white); background: rgba(0,0,0,0.15);
-  border-bottom-color: var(--white);
+  color: #ffffff; background: transparent;
+  border-bottom-color: var(--gold);
 }
 
 /* ── PANELS ── */
@@ -112,11 +110,11 @@ body, #root {
   background: var(--navy); padding: 10px 16px;
   display: flex; flex-wrap: wrap; gap: 6px 20px; justify-content: center;
 }
-.coach-item { font-size: 0.875rem; line-height: 1.45; color: var(--light-blue); text-align: center; }
+.coach-item { font-size: 0.875rem; line-height: 1.45; color: #ffffff; text-align: center; }
 .coach-item strong {
   display: block; font-size: 0.75rem;
   text-transform: uppercase; letter-spacing: 0.06em;
-  color: var(--mid-blue); font-weight: 600;
+  color: #ffffff; font-weight: 700;
   line-height: 1.4;
 }
 
@@ -124,72 +122,70 @@ body, #root {
 .roster-table { width: 100%; border-collapse: collapse; }
 .roster-table tr:nth-child(odd)  { background: var(--row-dark); }
 .roster-table tr:nth-child(even) { background: var(--row-light); }
-.roster-table td { padding: 11px 10px; font-size: 1rem; line-height: 1.45; }
+.roster-table td { padding: 11px 10px; font-size: 1rem; line-height: 1.45; color: #ffffff; }
 
 .num {
-  font-family: var(--display);
   font-weight: 800; font-size: 1rem;
-  color: var(--white); width: 52px; white-space: nowrap;
+  color: #ffffff; width: 52px; white-space: nowrap;
 }
 .player-name {
-  font-family: var(--display);
-  font-weight: 700; font-size: 1rem; color: var(--white);
+  font-weight: 700; font-size: 1rem; color: #ffffff;
   line-height: 1.3;
 }
 .year-badge {
   display: inline-block; background: rgba(0,0,0,0.25);
-  color: var(--light-blue); font-size: 0.65rem; font-weight: 700;
+  color: #ffffff; font-size: 0.65rem; font-weight: 800;
   text-transform: uppercase; letter-spacing: 0.05em;
   padding: 2px 5px; border-radius: 3px;
   margin-left: 5px; vertical-align: middle;
 }
-.parents { font-size: 0.875rem; line-height: 1.45; color: var(--light-blue); text-align: right; white-space: nowrap; }
+.parents { font-size: 0.875rem; line-height: 1.45; color: #ffffff; text-align: right; white-space: nowrap; }
 
 /* ── SCHEDULE TABLE ── */
 .schedule-table { width: 100%; border-collapse: collapse; }
 .schedule-table tr:nth-child(odd)  { background: var(--row-dark); }
 .schedule-table tr:nth-child(even) { background: var(--row-light); }
 .schedule-table tr.playoff-row     { background: var(--navy) !important; }
-.schedule-table td { padding: 11px 8px; font-size: 1rem; line-height: 1.45; color: var(--white); }
+.schedule-table td { padding: 11px 8px; font-size: 1rem; line-height: 1.45; color: #ffffff; }
 
 .date-col {
-  font-family: var(--display);
   font-weight: 800; font-size: 0.95rem; width: 42px;
+  color: #ffffff;
 }
-.day-col { font-size: 0.75rem; line-height: 1.4; color: var(--light-blue); width: 28px; text-transform: uppercase; }
-.opp-col { font-family: var(--display); font-weight: 700; font-size: 0.95rem; }
-.opp-col .away { color: var(--light-blue); font-weight: 600; }
+.day-col { font-size: 0.75rem; line-height: 1.4; color: #ffffff; width: 28px; text-transform: uppercase; }
+.opp-col { font-weight: 700; font-size: 0.95rem; color: #ffffff; }
+.opp-col .away { color: #ffffff; font-weight: 600; }
 
 .time-col {
   font-weight: 600; font-size: 0.875rem;
-  text-align: right; color: var(--light-blue); white-space: nowrap;
+  text-align: right; color: #ffffff; white-space: nowrap;
   width: 58px;
 }
 
 /* score column */
 .score-col {
   text-align: right; white-space: nowrap; width: 62px;
+  color: #ffffff;
 }
 .result-badge {
   display: inline-flex; align-items: center; gap: 4px;
-  font-family: var(--display);
   font-weight: 700; font-size: 0.82rem;
+  color: #ffffff;
 }
-.result-w { color: var(--win); }
-.result-l { color: var(--loss); }
-.result-t { color: var(--tie); }
+.result-w { color: #ffffff; }
+.result-l { color: #ffffff; }
+.result-t { color: #ffffff; }
 .result-letter {
   display: inline-block; width: 16px; height: 16px; line-height: 16px;
   text-align: center; border-radius: 3px; font-size: 0.7rem;
-  font-weight: 800; color: var(--navy);
+  font-weight: 800; color: #ffffff;
 }
 .result-letter.w { background: var(--win); }
 .result-letter.l { background: var(--loss); }
 .result-letter.t { background: var(--tie); }
 
 .home-badge {
-  display: inline-block; background: var(--gold); color: var(--navy);
-  font-family: var(--display);
+  display: inline-block; background: var(--gold); color: #ffffff;
   font-size: 0.6rem; font-weight: 800; text-transform: uppercase;
   letter-spacing: 0.05em; padding: 1px 5px; border-radius: 3px;
   vertical-align: middle; margin-right: 4px;
@@ -201,27 +197,20 @@ body, #root {
   display: flex; gap: 16px; justify-content: center; align-items: center;
 }
 .record-bar span {
-  font-family: var(--display);
-  font-weight: 700; font-size: 0.9rem; color: var(--light-blue);
+  font-weight: 700; font-size: 0.9rem; color: #ffffff;
 }
-.record-bar .record-val { color: var(--white); font-size: 1.05rem; }
-.record-bar .record-w { color: var(--win); }
-.record-bar .record-l { color: var(--loss); }
-.record-bar .record-t { color: var(--tie); }
+.record-bar .record-val { color: #ffffff; font-size: 1.05rem; }
+.record-bar .record-w { color: #ffffff; }
+.record-bar .record-l { color: #ffffff; }
+.record-bar .record-t { color: #ffffff; }
 
-/* ── VERSE ── */
-.verse { background: var(--navy); text-align: center; padding: 18px 24px; color: var(--light-blue); }
-.verse blockquote { font-style: italic; font-size: 1rem; line-height: 1.65; margin-bottom: 6px; }
-.verse cite { font-size: 0.875rem; line-height: 1.5; font-style: normal; color: var(--mid-blue); font-weight: 600; }
-
-/* ── COMING SOON ── */
-.coming-soon-panel { text-align: center; padding: 60px 24px; color: var(--mid-blue); }
+.coming-soon-panel { text-align: center; padding: 60px 24px; color: #ffffff; }
 .coming-soon-panel .cs-icon { font-size: 3rem; margin-bottom: 12px; }
 .coming-soon-panel h2 {
-  font-family: var(--display); font-weight: 800;
-  font-size: 1.5rem; color: var(--navy); text-transform: uppercase; margin-bottom: 6px;
+  font-weight: 800;
+  font-size: 1.5rem; color: #ffffff; text-transform: uppercase; margin-bottom: 6px;
 }
-.coming-soon-panel p { font-size: 1rem; line-height: 1.55; }
+.coming-soon-panel p { font-size: 1rem; line-height: 1.55; color: #ffffff; }
 
 @media (max-width: 600px) {
   body, #root {
@@ -236,8 +225,5 @@ body, #root {
   .parents,
   .coach-item {
     line-height: 1.55;
-  }
-  .verse blockquote {
-    line-height: 1.75;
   }
 }

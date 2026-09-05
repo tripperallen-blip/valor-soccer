@@ -42,7 +42,7 @@ function Roster({ team }) {
               <td className="num">{p.number}</td>
               <td className="player-name">
                 <span className="player-name-text">{p.name}</span>
-                <strong className="player-grade">{GRADE_LABELS[p.year] ?? p.year}</strong>
+                <strong className="year-badge">{GRADE_LABELS[p.year] ?? p.year}</strong>
               </td>
               <td className="parents">{p.parents}</td>
             </tr>

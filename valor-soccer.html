@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <title>2025 Valor Boys Soccer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:       #1b2a5e;
+      --mid-blue:   #5a7ca8;
+      --light-blue: #b8d4e8;
+      --pale-blue:  #ddeef7;
+      --gold:       #f0b429;
+      --white:      #ffffff;
+      --row-dark:   #3d5a80;
+      --row-light:  #6b8faf;
+      --text-light: #e8f0f8;
+      --win:        #4caf82;
+      --loss:       #e05a5a;
+      --tie:        #aaaaaa;
+    }
+
+    body {
+      font-family: 'Barlow', sans-serif;
+      background: var(--pale-blue);
+      color: var(--navy);
+      min-height: 100vh;
+    }
+
+    /* ── HEADER ── */
+    .header { background: var(--navy); padding: 16px 16px 0; text-align: center; }
+
+    .header-top {
+      display: flex; align-items: center; justify-content: center;
+      gap: 14px; margin-bottom: 14px;
+    }
+
+    .logo { width: 60px; height: 60px; }
+
+    .header-title h1 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 800; font-size: 1.7rem;
+      color: var(--white); line-height: 1;
+      text-transform: uppercase; letter-spacing: 0.04em;
+    }
+    .header-title p {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 600; font-size: 1rem;
+      color: var(--light-blue); text-transform: uppercase; letter-spacing: 0.06em;
+    }
+
+    /* ── TEAM TABS ── */
+    .team-tabs { display: flex; background: var(--navy); padding: 0 8px; gap: 4px; }
+
+    .team-tab {
+      flex: 1; padding: 10px 4px; text-align: center;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700; font-size: 0.95rem;
+      text-transform: uppercase; letter-spacing: 0.05em;
+      color: var(--light-blue); background: transparent;
+      border: none; border-bottom: 3px solid transparent;
+      cursor: pointer; transition: all 0.2s;
+    }
+    .team-tab.active { color: var(--white); border-bottom-color: var(--gold); }
+    .team-tab.disabled { opacity: 0.4; cursor: default; }
+
+    /* ── VIEW TABS ── */
+    .view-tabs { display: flex; background: var(--mid-blue); }
+
+    .view-tab {
+      flex: 1; padding: 10px; text-align: center;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700; font-size: 1rem;
+      text-transform: uppercase; letter-spacing: 0.06em;
+      color: var(--text-light); background: transparent;
+      border: none; border-bottom: 3px solid transparent;
+      cursor: pointer; transition: all 0.2s;
+    }
+    .view-tab.active {
+      color: var(--white); background: rgba(0,0,0,0.15);
+      border-bottom-color: var(--white);
+    }
+
+    /* ── PANELS ── */
+    .panel { display: none; }
+    .panel.active { display: block; }
+
+    /* ── COACHES ── */
+    .coaches-bar {
+      background: var(--navy); padding: 10px 16px;
+      display: flex; flex-wrap: wrap; gap: 6px 20px; justify-content: center;
+    }
+    .coach-item { font-size: 0.78rem; color: var(--light-blue); text-align: center; }
+    .coach-item strong {
+      display: block; font-size: 0.7rem;
+      text-transform: uppercase; letter-spacing: 0.06em;
+      color: var(--mid-blue); font-weight: 600;
+    }
+
+    /* ── ROSTER TABLE ── */
+    .roster-table { width: 100%; border-collapse: collapse; }
+    .roster-table tr:nth-child(odd)  { background: var(--row-dark); }
+    .roster-table tr:nth-child(even) { background: var(--row-light); }
+    .roster-table td { padding: 10px 10px; font-size: 0.9rem; }
+
+    .num {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 800; font-size: 1rem;
+      color: var(--white); width: 52px; white-space: nowrap;
+    }
+    .player-name {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700; font-size: 1rem; color: var(--white);
+    }
+    .year-badge {
+      display: inline-block; background: rgba(0,0,0,0.25);
+      color: var(--light-blue); font-size: 0.65rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.05em;
+      padding: 2px 5px; border-radius: 3px;
+      margin-left: 5px; vertical-align: middle;
+    }
+    .parents { font-size: 0.78rem; color: var(--light-blue); text-align: right; white-space: nowrap; }
+
+    /* ── SCHEDULE TABLE ── */
+    .schedule-table { width: 100%; border-collapse: collapse; }
+    .schedule-table tr:nth-child(odd)  { background: var(--row-dark); }
+    .schedule-table tr:nth-child(even) { background: var(--row-light); }
+    .schedule-table tr.playoff-row     { background: var(--navy) !important; }
+    .schedule-table td { padding: 10px 8px; font-size: 0.88rem; color: var(--white); }
+
+    .date-col {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 800; font-size: 0.95rem; width: 42px;
+    }
+    .day-col { font-size: 0.72rem; color: var(--light-blue); width: 28px; text-transform: uppercase; }
+    .opp-col { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 0.95rem; }
+    .opp-col .away { color: var(--light-blue); font-weight: 600; }
+
+    .time-col {
+      font-weight: 600; font-size: 0.8rem;
+      text-align: right; color: var(--light-blue); white-space: nowrap;
+      width: 58px;
+    }
+
+    /* score column */
+    .score-col {
+      text-align: right; white-space: nowrap; width: 62px;
+    }
+    .result-badge {
+      display: inline-flex; align-items: center; gap: 4px;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700; font-size: 0.82rem;
+    }
+    .result-w { color: var(--win); }
+    .result-l { color: var(--loss); }
+    .result-t { color: var(--tie); }
+    .result-letter {
+      display: inline-block; width: 16px; height: 16px; line-height: 16px;
+      text-align: center; border-radius: 3px; font-size: 0.7rem;
+      font-weight: 800; color: var(--navy);
+    }
+    .result-letter.w { background: var(--win); }
+    .result-letter.l { background: var(--loss); }
+    .result-letter.t { background: var(--tie); }
+
+    .home-badge {
+      display: inline-block; background: var(--gold); color: var(--navy);
+      font-size: 0.6rem; font-weight: 800; text-transform: uppercase;
+      letter-spacing: 0.05em; padding: 1px 5px; border-radius: 3px;
+      vertical-align: middle; margin-right: 4px;
+    }
+
+    /* ── RECORD BANNER ── */
+    .record-bar {
+      background: rgba(0,0,0,0.2); padding: 8px 16px;
+      display: flex; gap: 16px; justify-content: center; align-items: center;
+    }
+    .record-bar span {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700; font-size: 0.9rem; color: var(--light-blue);
+    }
+    .record-bar .record-val { color: var(--white); font-size: 1.05rem; }
+    .record-bar .record-w { color: var(--win); }
+    .record-bar .record-l { color: var(--loss); }
+    .record-bar .record-t { color: var(--tie); }
+
+    /* ── VERSE ── */
+    .verse { background: var(--navy); text-align: center; padding: 18px 24px; color: var(--light-blue); }
+    .verse blockquote { font-style: italic; font-size: 0.88rem; line-height: 1.55; margin-bottom: 6px; }
+    .verse cite { font-size: 0.78rem; font-style: normal; color: var(--mid-blue); font-weight: 600; }
+
+    /* ── COMING SOON ── */
+    .coming-soon-panel { text-align: center; padding: 60px 24px; color: var(--mid-blue); }
+    .coming-soon-panel .cs-icon { font-size: 3rem; margin-bottom: 12px; }
+    .coming-soon-panel h2 {
+      font-family: 'Barlow Condensed', sans-serif; font-weight: 800;
+      font-size: 1.5rem; color: var(--navy); text-transform: uppercase; margin-bottom: 6px;
+    }
+    .coming-soon-panel p { font-size: 0.9rem; }
+  </style>
+</head>
+<body>
+
+<!-- ══ HEADER ══ -->
+<div class="header">
+  <div class="header-top">
+    <svg class="logo" viewBox="0 0 100 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M50 4L8 22V62C8 86 26 106 50 116C74 106 92 86 92 62V22L50 4Z" fill="#2a4a8a" stroke="#5a8ac8" stroke-width="2"/>
+      <path d="M50 14L16 29V62C16 82 31 99 50 108C69 99 84 82 84 62V29L50 14Z" fill="#1b2a5e"/>
+      <rect x="46" y="24" width="8" height="28" rx="2" fill="white"/>
+      <rect x="36" y="32" width="28" height="8" rx="2" fill="white"/>
+      <circle cx="50" cy="76" r="14" fill="#3a5a90" stroke="#7aaad0" stroke-width="1.5"/>
+      <path d="M50 64 L44 70 L46 78 L54 78 L56 70 Z" fill="white" opacity="0.7"/>
+      <path d="M28 54 H72 L68 62 H32 Z" fill="#5a8ac8"/>
+      <text x="50" y="61" text-anchor="middle" fill="white" font-size="7" font-family="Arial" font-weight="bold">VALOR</text>
+    </svg>
+    <div class="header-title">
+      <h1>2025 Boys Soccer</h1>
+      <p>Valor Christian High School</p>
+    </div>
+  </div>
+  <div class="team-tabs" id="teamTabs"></div>
+</div>
+
+<!-- ══ CONTENT ══ -->
+<div id="content"></div>
+
+<script>
+// ─────────────────────────────────────────
+// DATA — update scores here as games finish
+// result: "W", "L", or "T"   score: "3-1" (Valor first)
+// ─────────────────────────────────────────
+const TEAMS = {
+  varsity: {
+    label: "Varsity",
+    verse: {
+      text: "Even though I walk through the darkest valley, I will fear no evil, for you are with me; your rod and your staff, they comfort me.",
+      ref:  "Psalm 23:4"
+    },
+    coaches: [
+      { role: "Head Coach",   name: "Nate Flack" },
+      { role: "Asst. Coach",  name: "Mike Wright" },
+      { role: "Goalie Coach", name: "Zuriel Lozano" }
+    ],
+    roster: [
+      { number: "0/GK",    name: "Cooper Daniel",    year: "SR", parents: "David / Lisa" },
+      { number: "0/GK/20", name: "Benjamin Hazlett", year: "JR", parents: "Adam / Amy" },
+      { number: "1/GK",    name: "Gio Natale",       year: "SR", parents: "Adam / Viktoria" },
+      { number: "5",       name: "Beezer Everett",   year: "JR", parents: "Jason / Stafie" },
+      { number: "6",       name: "Braden Johnston",  year: "SR", parents: "Damon / Valerie" },
+      { number: "7",       name: "Noah Foley",       year: "JR", parents: "David / Tiffany" },
+      { number: "8",       name: "Jett Martinez",    year: "JR", parents: "Quinn / Jessica" },
+      { number: "9",       name: "Max Allen",        year: "JR", parents: "Tripper / Holly" },
+      { number: "10",      name: "Joshua Hazlett",   year: "SR", parents: "Adam / Amy" },
+      { number: "11",      name: "Marshall Foley",   year: "SO", parents: "David / Tiffany" },
+      { number: "12",      name: "Logan Bauer",      year: "JR", parents: "Brian / Heather" },
+      { number: "13",      name: "Noah Kurban",      year: "SR", parents: "Scott / Kim" },
+      { number: "14",      name: "Blake Thurman",    year: "SR", parents: "Coble / Julia" },
+      { number: "15",      name: "Finn Erwin",       year: "FR", parents: "Todd / Kelsey" },
+      { number: "16",      name: "Nick Dalhausser",  year: "JR", parents: "Todd / Maggie" },
+      { number: "17",      name: "Bourne Weideman",  year: "SR", parents: "Marc / Christi" },
+      { number: "18",      name: "Luke Brust",       year: "JR", parents: "Chris / Marti" },
+      { number: "19",      name: "Luke Edgar",       year: "SR", parents: "Wil / Sherri" },
+      { number: "21",      name: "Alex Byer",        year: "SO", parents: "Ted / Nicole" },
+      { number: "22",      name: "David Ashouri",    year: "SO", parents: "Marc / Yelena" },
+      { number: "23",      name: "Hagen Grothe",     year: "JR", parents: "Jeff / Merritt" },
+      { number: "24",      name: "Nathan Dahlstrom", year: "SR", parents: "Matt / Ambryn" }
+    ],
+    schedule: [
+      // To record a result: set result to "W", "L", or "T" and score to "X-X" (Valor first)
+      { date: "8/22",  day: "FRI", opponent: "Northfield",        home: true,  time: "7:00 PM",  score: null, result: null },
+      { date: "8/26",  day: "TUE", opponent: "Fairview",          home: true,  time: "7:00 PM",  score: null, result: null },
+      { date: "8/28",  day: "THU", opponent: "Thunder Ridge",     home: true,  time: "7:00 PM",  score: null, result: null },
+      { date: "9/5",   day: "FRI", opponent: "Colorado Academy",  home: false, time: "4:00 PM",  score: null, result: null },
+      { date: "9/9",   day: "TUE", opponent: "Cherokee Trail",    home: true,  time: "7:00 PM",  score: null, result: null },
+      { date: "9/11",  day: "THU", opponent: "Golden",            home: false, time: "7:00 PM",  score: null, result: null },
+      { date: "9/15",  day: "MON", opponent: "Grandview",         home: false, time: "6:00 PM",  score: null, result: null },
+      { date: "9/20",  day: "SAT", opponent: "Eagle Valley",      home: true,  time: "2:00 PM",  score: null, result: null },
+      { date: "9/25",  day: "THU", opponent: "Columbine",         home: true,  time: "7:30 PM",  score: null, result: null },
+      { date: "9/30",  day: "TUE", opponent: "Arvada West",       home: false, time: "5:00 PM",  score: null, result: null },
+      { date: "10/4",  day: "SAT", opponent: "Lakewood",          home: true,  time: "1:00 PM",  score: null, result: null },
+      { date: "10/7",  day: "TUE", opponent: "Ralston Valley",    home: false, time: "7:00 PM",  score: null, result: null },
+      { date: "10/14", day: "TUE", opponent: "Chatfield",         home: false, time: "5:00 PM",  score: null, result: null },
+      { date: "10/17", day: "FRI", opponent: "League Tournament", home: null,  time: "TBD",      score: null, result: null },
+      { date: "10/21", day: "TUE", opponent: "League Tournament", home: null,  time: "TBD",      score: null, result: null },
+      { date: "TBD",   day: "",    opponent: "State Playoffs",    home: null,  time: "TBD",      score: null, result: null, playoff: true }
+    ]
+  },
+  jv: { label: "JV", comingSoon: true },
+  l3: { label: "L3", comingSoon: true }
+};
+
+// ─────────────────────────────────────────
+// STATE
+// ─────────────────────────────────────────
+let activeTeam = 'varsity';
+let activeView = { varsity: 'roster', jv: 'roster', l3: 'roster' };
+
+// ─────────────────────────────────────────
+// RENDER
+// ─────────────────────────────────────────
+function render() {
+  renderTabs();
+  renderContent();
+}
+
+function renderTabs() {
+  const tabs = document.getElementById('teamTabs');
+  tabs.innerHTML = Object.entries(TEAMS).map(([key, t]) => `
+    <button class="team-tab ${key === activeTeam ? 'active' : ''} ${t.comingSoon ? 'disabled' : ''}"
+      onclick="${t.comingSoon ? '' : `selectTeam('${key}')`}">
+      ${t.label}${t.comingSoon ? ' <span style="font-size:.6rem">(soon)</span>' : ''}
+    </button>
+  `).join('');
+}
+
+function renderContent() {
+  const content = document.getElementById('content');
+  content.innerHTML = Object.keys(TEAMS).map(key => {
+    const t = TEAMS[key];
+    if (t.comingSoon) return `
+      <div id="team-${key}" class="panel ${key === activeTeam ? 'active' : ''}">
+        <div class="view-tabs">
+          <button class="view-tab active">Roster</button>
+          <button class="view-tab">Schedule</button>
+        </div>
+        <div class="coming-soon-panel">
+          <div class="cs-icon">⚽</div>
+          <h2>${t.label} Coming Soon</h2>
+          <p>${t.label} roster and schedule will be added here.</p>
+        </div>
+      </div>`;
+
+    const view = activeView[key];
+    return `
+      <div id="team-${key}" class="panel ${key === activeTeam ? 'active' : ''}">
+        <div class="view-tabs">
+          <button class="view-tab ${view === 'roster' ? 'active' : ''}"
+            onclick="selectView('${key}','roster')">Roster</button>
+          <button class="view-tab ${view === 'schedule' ? 'active' : ''}"
+            onclick="selectView('${key}','schedule')">Schedule</button>
+        </div>
+        <div id="${key}-roster" class="panel ${view === 'roster' ? 'active' : ''}">
+          ${renderRoster(t)}
+        </div>
+        <div id="${key}-schedule" class="panel ${view === 'schedule' ? 'active' : ''}">
+          ${renderSchedule(t)}
+        </div>
+      </div>`;
+  }).join('');
+}
+
+function renderRoster(t) {
+  const coaches = t.coaches.map(c => `
+    <div class="coach-item"><strong>${c.role}</strong>${c.name}</div>`).join('');
+
+  const rows = t.roster.map(p => `
+    <tr>
+      <td class="num">${p.number}</td>
+      <td class="player-name">${p.name} <span class="year-badge">${p.year}</span></td>
+      <td class="parents">${p.parents}</td>
+    </tr>`).join('');
+
+  return `
+    <div class="coaches-bar">${coaches}</div>
+    <table class="roster-table"><tbody>${rows}</tbody></table>
+    ${renderVerse(t)}`;
+}
+
+function renderSchedule(t) {
+  // compute record
+  let w = 0, l = 0, tie = 0;
+  t.schedule.forEach(g => {
+    if (g.result === 'W') w++;
+    else if (g.result === 'L') l++;
+    else if (g.result === 'T') tie++;
+  });
+  const hasResults = w + l + tie > 0;
+
+  const recordBar = hasResults ? `
+    <div class="record-bar">
+      <span>Record</span>
+      <span class="record-val">
+        <span class="record-w">${w}W</span> –
+        <span class="record-l">${l}L</span>
+        ${tie > 0 ? `– <span class="record-t">${tie}T</span>` : ''}
+      </span>
+    </div>` : '';
+
+  const rows = t.schedule.map(g => {
+    const oppCell = g.home === null
+      ? g.opponent
+      : g.home
+        ? `<span class="home-badge">H</span>${g.opponent}`
+        : `<span class="away">@ ${g.opponent}</span>`;
+
+    const timeCell = `<span style="color:var(--light-blue);font-size:0.8rem;white-space:nowrap">${g.time}</span>`;
+
+    let scoreCell = '';
+    if (g.result) {
+      const cls = g.result.toLowerCase();
+      scoreCell = `<div class="result-badge result-${cls}">
+        <span>${g.score}</span>
+        <span class="result-letter ${cls}">${g.result}</span>
+      </div>`;
+    } else {
+      scoreCell = `<span style="color:rgba(255,255,255,0.2);font-size:0.8rem">—</span>`;
+    }
+
+    return `<tr class="${g.playoff ? 'playoff-row' : ''}">
+      <td class="date-col" style="${g.playoff ? 'color:var(--gold)' : ''}">${g.date}</td>
+      <td class="day-col">${g.day}</td>
+      <td class="opp-col" style="${g.playoff ? 'color:var(--gold);font-weight:800' : ''}">${oppCell}</td>
+      <td class="time-col">${timeCell}</td>
+      <td class="score-col" style="${g.playoff ? 'color:var(--gold)' : ''}">${scoreCell}</td>
+    </tr>`;
+  }).join('');
+
+  return `
+    ${recordBar}
+    <table class="schedule-table"><tbody>${rows}</tbody></table>
+    ${renderVerse(t)}`;
+}
+
+function renderVerse(t) {
+  return `<div class="verse">
+    <blockquote>"${t.verse.text}"</blockquote>
+    <cite>${t.verse.ref}</cite>
+  </div>`;
+}
+
+// ─────────────────────────────────────────
+// CONTROLS
+// ─────────────────────────────────────────
+function selectTeam(key) {
+  activeTeam = key;
+  render();
+}
+
+function selectView(team, view) {
+  activeView[team] = view;
+  render();
+}
+
+render();
+</script>
+</body>
+</html>

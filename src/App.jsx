@@ -17,31 +17,34 @@ function Logo() {
   )
 }
 
+function Coaches({ coaches }) {
+  return (
+    <div className="coaches-bar">
+      {(coaches ?? []).map((c) => (
+        <div className="coach-item" key={`${c.role}-${c.name}`}>
+          <strong>{c.role}</strong>
+          {c.name}
+        </div>
+      ))}
+    </div>
+  )
+}
+
 function Roster({ team }) {
   return (
-    <>
-      <div className="coaches-bar">
-        {(team.coaches ?? []).map((c) => (
-          <div className="coach-item" key={`${c.role}-${c.name}`}>
-            <strong>{c.role}</strong>
-            {c.name}
-          </div>
+    <table className="roster-table">
+      <tbody>
+        {(team.roster ?? []).map((p, i) => (
+          <tr key={`${p.number}-${p.name}-${i}`}>
+            <td className="num">{p.number}</td>
+            <td className="player-name">
+              {p.name} <span className="year-badge">{p.year}</span>
+            </td>
+            <td className="parents">{p.parents}</td>
+          </tr>
         ))}
-      </div>
-      <table className="roster-table">
-        <tbody>
-          {(team.roster ?? []).map((p, i) => (
-            <tr key={`${p.number}-${p.name}-${i}`}>
-              <td className="num">{p.number}</td>
-              <td className="player-name">
-                {p.name} <span className="year-badge">{p.year}</span>
-              </td>
-              <td className="parents">{p.parents}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </>
+      </tbody>
+    </table>
   )
 }
 
@@ -169,6 +172,7 @@ function App() {
         <div id="varsity-schedule" className={`panel${activeView === 'schedule' ? ' active' : ''}`}>
           <Schedule team={varsityData} />
         </div>
+        <Coaches coaches={varsityData.coaches} />
       </div>
     </>
   )

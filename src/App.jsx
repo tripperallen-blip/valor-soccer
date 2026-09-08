@@ -4,16 +4,11 @@ import './App.css'
 
 function Logo() {
   return (
-    <svg className="logo" viewBox="0 0 100 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M50 4L8 22V62C8 86 26 106 50 116C74 106 92 86 92 62V22L50 4Z" fill="#2a4a8a" stroke="#5a8ac8" strokeWidth="2" />
-      <path d="M50 14L16 29V62C16 82 31 99 50 108C69 99 84 82 84 62V29L50 14Z" fill="#1b2a5e" />
-      <rect x="46" y="24" width="8" height="28" rx="2" fill="white" />
-      <rect x="36" y="32" width="28" height="8" rx="2" fill="white" />
-      <circle cx="50" cy="76" r="14" fill="#3a5a90" stroke="#7aaad0" strokeWidth="1.5" />
-      <path d="M50 64 L44 70 L46 78 L54 78 L56 70 Z" fill="white" opacity="0.7" />
-      <path d="M28 54 H72 L68 62 H32 Z" fill="#5a8ac8" />
-      <text x="50" y="61" textAnchor="middle" fill="#ffffff" fontSize="7" fontFamily="Helvetica, Arial, sans-serif" fontWeight="normal">VALOR</text>
-    </svg>
+    <img
+      className="logo"
+      src="/VALOR_V_SWOOP.png"
+      alt="Valor"
+    />
   )
 }
 

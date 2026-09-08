@@ -6,7 +6,7 @@
   --pale-blue:  #ffffff;
   --gold:       #f0b429;
   --white:      #ffffff;
-  --row-dark:   #f5f5f5;
+  --row-dark:   #fafafa;
   --row-light:  #ffffff;
   --text:       #333333;
   --text-light: #e8f0f8;
@@ -124,7 +124,14 @@ button, h1, h2, strong, b {
 .roster-table { width: 100%; border-collapse: collapse; }
 .roster-table tr:nth-child(odd)  { background: var(--row-dark); }
 .roster-table tr:nth-child(even) { background: var(--row-light); }
-.roster-table td { padding: 11px 10px; font-size: 12px; line-height: 1.45; color: #333; vertical-align: top; }
+.roster-table td {
+  padding: 8px 10px;
+  font-size: 12px;
+  line-height: 1.45;
+  color: #333;
+  vertical-align: top;
+  border-bottom: 0.25px solid #777777;
+}
 
 .num {
   font-weight: 400; font-size: 12px;
@@ -156,7 +163,13 @@ button, h1, h2, strong, b {
 .schedule-table tr:nth-child(odd)  { background: var(--row-dark); }
 .schedule-table tr:nth-child(even) { background: var(--row-light); }
 .schedule-table tr.playoff-row     { background: var(--navy) !important; }
-.schedule-table td { padding: 11px 8px; font-size: 1rem; line-height: 1.45; color: #333; }
+.schedule-table td {
+  padding: 8px 8px;
+  font-size: 1rem;
+  line-height: 1.45;
+  color: #333;
+  border-bottom: 0.25px solid #777777;
+}
 
 .date-col {
   font-weight: 400; font-size: 0.95rem; width: 42px;
@@ -228,8 +241,8 @@ button, h1, h2, strong, b {
   }
   .roster-table td,
   .schedule-table td {
-    padding-top: 13px;
-    padding-bottom: 13px;
+    padding-top: 10px;
+    padding-bottom: 10px;
     line-height: 1.5;
   }
   .parents,

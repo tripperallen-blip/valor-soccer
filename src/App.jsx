@@ -69,7 +69,7 @@ function scoreCell(game) {
     )
   }
   return (
-    <span style={{ color: '#333', fontSize: '0.8rem' }}>—</span>
+    <span style={{ color: '#111111', fontSize: '0.8rem' }}>—</span>
   )
 }
 
@@ -107,22 +107,22 @@ function Schedule({ team }) {
         <tbody>
           {schedule.map((g, i) => (
             <tr key={`${g.date}-${g.opponent}-${i}`} className={g.playoff ? 'playoff-row' : undefined}>
-              <td className="date-col" style={g.playoff ? { color: '#333' } : undefined}>
+              <td className="date-col" style={g.playoff ? { color: '#111111' } : undefined}>
                 {g.date}
               </td>
               <td className="day-col">{g.day}</td>
               <td
                 className="opp-col"
-                style={g.playoff ? { color: '#333' } : undefined}
+                style={g.playoff ? { color: '#111111' } : undefined}
               >
                 {opponentCell(g)}
               </td>
               <td className="time-col">
-                <span style={{ color: '#333', whiteSpace: 'nowrap' }}>
+                <span style={{ color: '#111111', whiteSpace: 'nowrap' }}>
                   {g.time}
                 </span>
               </td>
-              <td className="score-col" style={g.playoff ? { color: '#333' } : undefined}>
+              <td className="score-col" style={g.playoff ? { color: '#111111' } : undefined}>
                 {scoreCell(g)}
               </td>
             </tr>

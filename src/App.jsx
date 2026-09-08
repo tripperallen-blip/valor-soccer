@@ -19,7 +19,7 @@ function Logo() {
       <circle cx="50" cy="76" r="14" fill="#3a5a90" stroke="#7aaad0" strokeWidth="1.5" />
       <path d="M50 64 L44 70 L46 78 L54 78 L56 70 Z" fill="white" opacity="0.7" />
       <path d="M28 54 H72 L68 62 H32 Z" fill="#5a8ac8" />
-      <text x="50" y="61" textAnchor="middle" fill="#ffffff" fontSize="7" fontFamily="Helvetica, Arial, sans-serif" fontWeight="bold">VALOR</text>
+      <text x="50" y="61" textAnchor="middle" fill="#ffffff" fontSize="7" fontFamily="Helvetica, Arial, sans-serif" fontWeight="normal">VALOR</text>
     </svg>
   )
 }
@@ -121,7 +121,7 @@ function Schedule({ team }) {
               <td className="day-col">{g.day}</td>
               <td
                 className="opp-col"
-                style={g.playoff ? { color: '#333', fontWeight: 800 } : undefined}
+                style={g.playoff ? { color: '#333' } : undefined}
               >
                 {opponentCell(g)}
               </td>
